@@ -18,7 +18,7 @@ window.SOFTWARE = [
     description: '支持对话、写作、文档分析和日常工作任务的 AI 助手。',
     tags: ['AI 助手', '文档分析', '写作'],
     icon: 'assets/claude.png',
-    package: { path: '', fileName: '', version: '', size: '', platform: '', architecture: '' }
+    package: { path: 'packages/Claude Setup.exe', fileName: 'Claude Setup.exe', version: '1.0.0.0', size: '6.70 MiB', platform: 'windows', architecture: 'x64' }
   },
   {
     id: 'cursor',
