@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="AI 工具库：集中发现 Codex、Claude、Cursor 等 AI 工具，获取官方安装包、安装命令和下载入口。">
+    <meta name="theme-color" content="#f7f8fa">
+    <title>AI 工具库 · 找到你的下一件好工具</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css">
+    <script src="assets/lucide.min.js" defer></script>
+    <script src="catalog.js" defer></script>
+    <script src="config.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳转到内容</a>
+    <aside class="sidebar" aria-label="主导航">
+      <a class="brand" href="./" aria-label="AI 工具库首页"><span class="brand-mark"><i data-lucide="box"></i></span><span>AI 工具库<span class="brand-sub">THE AI TOOLBOX</span></span></a>
+      <div class="sidebar-nav">
+        <p class="nav-label">工作空间</p>
+        <button class="nav-item active" data-view="all" aria-pressed="true"><i data-lucide="compass"></i><span>发现工具</span><i class="nav-end" data-lucide="chevron-right"></i></button>
+        <button class="nav-item" data-view="favorites" aria-pressed="false"><i data-lucide="bookmark"></i><span>我的收藏</span><span class="nav-count" id="favorite-count">0</span></button>
+        <p class="nav-label category-label">工具分类</p>
+        <button class="nav-item" data-category="coding" aria-pressed="false"><i data-lucide="code-2"></i><span>编程开发</span><span class="nav-count" data-count="coding"></span></button>
+        <button class="nav-item" data-category="assistant" aria-pressed="false"><i data-lucide="message-circle"></i><span>AI 助手</span><span class="nav-count" data-count="assistant"></span></button>
+        <button class="nav-item" data-category="local" aria-pressed="false"><i data-lucide="hard-drive"></i><span>本地模型</span><span class="nav-count" data-count="local"></span></button>
+      </div>
+      <div class="sidebar-bottom">
+        <div class="source-note"><span class="source-note-icon"><i data-lucide="shield-check"></i></span><strong>直达官方来源</strong><p>每一次下载，都有据可循。</p></div>
+        <a class="nav-item source-link" hidden target="_blank" rel="noopener noreferrer"><i data-lucide="github"></i><span>GitHub 源码</span><i class="nav-end" data-lucide="arrow-up-right"></i></a>
+        <button class="nav-item" id="about-button"><i data-lucide="info"></i><span>关于工具库</span></button>
+        <div class="sidebar-copyright">精心整理，持续探索。<span>AI TOOLBOX / 2026</span></div>
+      </div>
+    </aside>
+
+    <div class="app-shell">
+      <header class="topbar">
+        <span class="breadcrumb">工作空间 <i data-lucide="chevron-right"></i> <strong id="breadcrumb-current">发现工具</strong></span>
+        <div class="topbar-actions"><span class="official-indicator"><span></span>官方来源</span><a class="icon-button source-link" hidden title="查看 GitHub 源码" aria-label="查看 GitHub 源码" target="_blank" rel="noopener noreferrer"><i data-lucide="github"></i></a></div>
+      </header>
+
+      <main id="main">
+        <section class="intro" aria-labelledby="page-title">
+          <div class="intro-copy"><p class="eyebrow"><span></span>为更好的创造而准备</p><h1 id="page-title">你的下一件 <span>AI 好工具。</span></h1><p class="intro-description">从灵感到实现，让合适的工具，陪你多走一步。</p></div>
+          <div class="intro-stat"><strong id="tool-total">8<span>+</span></strong><span>精选 AI 工具</span><span class="stat-line"></span><small>少一点寻找，多一点创造</small></div>
+        </section>
+
+        <section class="featured-section" id="featured-section" aria-labelledby="featured-title">
+          <div class="section-heading"><h2 id="featured-title"><i data-lucide="sparkles"></i>值得一试</h2><span>从这两款开始</span></div>
+          <div class="featured-grid" id="featured-grid"></div>
+        </section>
+
+        <section class="catalog-section" aria-labelledby="catalog-title">
+          <div class="section-heading catalog-heading"><h2 id="catalog-title">全部工具 <span id="result-count" class="result-count"></span></h2><div class="layout-toggle" aria-label="显示方式"><button class="icon-button selected" data-layout="grid" aria-label="网格视图" aria-pressed="true" title="网格视图"><i data-lucide="layout-grid"></i></button><button class="icon-button" data-layout="list" aria-label="列表视图" aria-pressed="false" title="列表视图"><i data-lucide="list"></i></button></div></div>
+          <div class="catalog-toolbar">
+            <label class="search-field"><i data-lucide="search"></i><input id="search" type="search" placeholder="搜索工具、开发者或关键词…" autocomplete="off" aria-label="搜索工具"><button class="clear-search" id="clear-search" hidden title="清空搜索" aria-label="清空搜索" type="button"><i data-lucide="x"></i></button></label>
+            <label class="platform-filter"><i data-lucide="monitor"></i><span class="sr-only">操作系统</span><select id="platform"><option value="all">所有平台</option><option value="windows">Windows</option><option value="macos">macOS</option><option value="linux">Linux</option></select><i data-lucide="chevron-down"></i></label>
+            <label class="sort-filter"><span class="sr-only">排列顺序</span><select id="sort"><option value="recommended">推荐排序</option><option value="name">名称 A–Z</option></select><i data-lucide="arrow-down-wide-narrow"></i></label>
+          </div>
+          <div class="category-tabs" role="group" aria-label="工具分类">
+            <button class="category-tab active" data-filter="all" aria-pressed="true">全部工具</button>
+            <button class="category-tab" data-filter="coding" aria-pressed="false">编程开发</button>
+            <button class="category-tab" data-filter="assistant" aria-pressed="false">AI 助手</button>
+            <button class="category-tab" data-filter="local" aria-pressed="false">本地模型</button>
+          </div>
+          <div id="tool-grid" class="tool-grid"></div>
+          <div id="empty-state" class="empty-state" hidden><i data-lucide="search-x"></i><h3 id="empty-title">没有找到相关工具</h3><p id="empty-description">试试其他关键词，或调整筛选条件。</p><button class="button button-primary" id="reset-filters">查看全部工具<i data-lucide="arrow-right"></i></button></div>
+          <p id="results-announcement" class="sr-only" role="status" aria-live="polite"></p>
+        </section>
+
+        <footer class="footer"><span><i data-lucide="box"></i>好工具，让想法发生。</span><span>独立整理 · 软件及商标归各自开发者所有</span><a class="source-link" hidden target="_blank" rel="noopener noreferrer">开源于 GitHub<i data-lucide="arrow-up-right"></i></a></footer>
+      </main>
+    </div>
+
+    <dialog id="tool-dialog" aria-labelledby="dialog-title"><div class="dialog-content" id="dialog-content"></div></dialog>
+    <dialog id="about-dialog" aria-labelledby="about-title"><div class="dialog-content"><button class="icon-button dialog-close" data-close title="关闭" aria-label="关闭"><i data-lucide="x"></i></button><span class="brand-mark about-mark"><i data-lucide="box"></i></span><p class="eyebrow">THE AI TOOLBOX</p><h2 id="about-title">少一点寻找，多一点创造。</h2><p class="about-copy">AI 工具库是独立的 AI 软件目录，与所列软件的开发商没有隶属关系。安装包和安装说明均指向官方来源，软件账户、订阅和服务条款由各开发商提供。</p><p class="about-copy">下载版本及系统要求以官方页面为准。本网站不托管或修改第三方安装包。</p><a class="button button-primary source-link" hidden target="_blank" rel="noopener noreferrer"><i data-lucide="github"></i>查看项目源码</a></div></dialog>
+    <div class="toast" id="toast" role="status" hidden></div>
+    <noscript><div class="noscript">请启用 JavaScript 以浏览完整工具目录。也可直接访问 <a href="https://developers.openai.com/codex/">Codex</a> 或 <a href="https://claude.ai/download">Claude 官方下载页</a>。</div></noscript>
+  </body>
+</html>

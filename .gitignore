@@ -1,0 +1,19 @@
+# Local development and verification
+node_modules/
+work/
+test/
+tests/
+test-results/
+playwright-report/
+coverage/
+*.log
+
+# Local environment and editor files
+.env
+.env.*
+!.env.example
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+Desktop.ini
