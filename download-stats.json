@@ -1,0 +1,31 @@
+{
+  "repository": "zoumkfl/tool-download-platform",
+  "updatedAt": "2026-09-11T08:07:58.785Z",
+  "tools": {
+    "codex": {
+      "release": null,
+      "asset": null,
+      "count": 0
+    },
+    "claude": {
+      "release": "installers-2026-09-11",
+      "asset": "Claude-Desktop-Setup.exe",
+      "count": 0
+    },
+    "cursor": {
+      "release": null,
+      "asset": null,
+      "count": 0
+    },
+    "claude-code": {
+      "release": "installers-2026-09-11",
+      "asset": "Claude-CLI-2.1.236-windows-x64.exe",
+      "count": 0
+    },
+    "hermes": {
+      "release": "installers-2026-09-11",
+      "asset": "Hermes-Setup.exe",
+      "count": 0
+    }
+  }
+}

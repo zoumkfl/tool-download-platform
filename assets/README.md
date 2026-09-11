@@ -9,13 +9,15 @@ The website's source-code license does not replace third-party asset rights.
 | `codex.png` | 640 x 640 | [LobeHub icons-static-png 1.97.0](https://unpkg.com/@lobehub/icons-static-png@1.97.0/light/codex-color.png), fallback product icon |
 | `claude.png` | 256 x 256 | [Official Claude website apple-touch icon](https://cdn.prod.website-files.com/6889473510b50328dbb70ae6/68c33859cc6cd903686c66a2_apple-touch-icon.png), linked from `claude.com/download`; also used for Claude Code |
 | `cursor.png` | 192 x 192 | [Official Cursor website icon](https://cursor.com/marketing-static/icon-192x192-light.png) |
+| `hermes.png` | Original PNG | [Official Hermes website icon](https://hermes-agent.nousresearch.com/icon.png?icon.160vfo.zgihhn.png), retrieved from the official download page |
 | `vscode.png` | 256 x 256 | [Official Visual Studio Code apple-touch icon](https://code.visualstudio.com/assets/apple-touch-icon.png) |
 | `ollama.png` | 256 x 256 | [Official Ollama GitHub organization avatar](https://github.com/ollama.png?size=256) |
 | `lmstudio.png` | 192 x 192 | [Official LM Studio website icon](https://lmstudio.ai/assets/android-chrome-192x192.png) |
 | `chatgpt.png` | 200 x 200 | [Official OpenAI GitHub organization avatar](https://github.com/openai.png?size=256) |
 
-All seven files are locally stored PNG images. Their format, dimensions, and
-nonblank pixel content were checked with Pillow and visually inspected.
+All eight files are locally stored PNG images. The Hermes icon was verified in
+desktop and mobile browser screenshots; the earlier seven images were also
+checked with Pillow.
 
 `lucide.min.js` is the UMD browser bundle from `lucide` version 1.8.0, copied from
 the configured bundled Node.js dependencies. Its ISC license is preserved in

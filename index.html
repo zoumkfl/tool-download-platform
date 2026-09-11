@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="工具下载平台，集中提供 Codex、Claude、Cursor 等 Agent 安装包。">
+    <meta name="description" content="工具下载平台，集中提供 Codex、Claude Desktop、Claude CLI、Hermes 等 Agent 下载与累计下载统计。">
     <meta name="theme-color" content="#f7f8fa">
     <title>工具下载平台</title>
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
@@ -11,6 +11,7 @@
     <script src="assets/lucide.min.js" defer></script>
     <script src="catalog.js" defer></script>
     <script src="config.js" defer></script>
+    <script src="download-stats.js" defer></script>
     <script src="app.js" defer></script>
   </head>
   <body>
@@ -41,9 +42,11 @@
 
       <main id="main">
         <section class="intro" aria-labelledby="page-title">
-          <div class="intro-copy"><p class="eyebrow"><span></span>AGENT DOWNLOADS</p><h1 id="page-title">工具<span>下载平台</span></h1><p class="intro-description">Codex、Claude 与你的 AI 工作伙伴。</p></div>
+          <div class="intro-copy"><p class="eyebrow"><span></span>AGENT DOWNLOADS</p><h1 id="page-title">工具<span>下载平台</span></h1><p class="intro-description">Codex、Claude、Hermes 与你的 AI 工作伙伴。</p></div>
           <div class="intro-stat"><strong id="tool-total">0</strong><span>Agent</span><small id="available-count">0 个安装包可下载</small></div>
         </section>
+
+        <div class="download-summary"><span><i data-lucide="download" aria-hidden="true"></i>累计下载 <strong id="download-total">--</strong></span><span id="download-stats-status" role="status">统计加载中</span><button class="icon-button" id="refresh-download-stats" title="刷新下载统计" aria-label="刷新下载统计"><i data-lucide="refresh-cw" aria-hidden="true"></i></button></div>
 
         <section class="catalog-section" aria-labelledby="catalog-title">
           <div class="section-heading catalog-heading"><h2 id="catalog-title">全部 Agent <span id="result-count" class="result-count"></span></h2><div class="layout-toggle" aria-label="显示方式"><button class="icon-button selected" data-layout="grid" aria-label="网格视图" aria-pressed="true" title="网格视图"><i data-lucide="layout-grid"></i></button><button class="icon-button" data-layout="list" aria-label="列表视图" aria-pressed="false" title="列表视图"><i data-lucide="list"></i></button></div></div>

@@ -1,4 +1,4 @@
-// Add a same-origin package path only after the installer has been uploaded.
+// Published release assets provide direct downloads and shared download counts.
 window.SOFTWARE = [
   {
     id: 'codex',
@@ -12,13 +12,13 @@ window.SOFTWARE = [
   },
   {
     id: 'claude',
-    name: 'Claude',
+    name: 'Claude Desktop',
     publisher: 'Anthropic',
     category: 'assistant',
     description: '支持对话、写作、文档分析和日常工作任务的 AI 助手。',
     tags: ['AI 助手', '文档分析', '写作'],
     icon: 'assets/claude.png',
-    package: { path: 'packages/Claude Setup.exe', fileName: 'Claude Setup.exe', version: '1.0.0.0', size: '6.70 MiB', platform: 'windows', architecture: 'x64' }
+    package: { path: 'packages/Claude Setup.exe', fileName: 'Claude-Desktop-Setup.exe', version: '1.0.0.0', size: '6.70 MiB', platform: 'windows', architecture: 'x64', release: 'installers-2026-09-11' }
   },
   {
     id: 'cursor',
@@ -32,12 +32,22 @@ window.SOFTWARE = [
   },
   {
     id: 'claude-code',
-    name: 'Claude Code',
+    name: 'Claude CLI',
     publisher: 'Anthropic',
     category: 'coding',
-    description: '面向开发任务的 AI 编程 Agent，可理解代码库并协助修改项目文件。',
+    description: 'Claude Code 命令行版，可理解代码库、修改项目文件并执行开发任务。',
     tags: ['AI 编程', '命令行', '代码库'],
     icon: 'assets/claude.png',
-    package: { path: '', fileName: '', version: '', size: '', platform: '', architecture: '' }
+    package: { path: '', fileName: 'Claude-CLI-2.1.236-windows-x64.exe', version: '2.1.236', size: '314.81 MiB', platform: 'windows', architecture: 'x64', release: 'installers-2026-09-11', kind: 'CLI 可执行文件' }
+  },
+  {
+    id: 'hermes',
+    name: 'Hermes',
+    publisher: 'Nous Research',
+    category: 'assistant',
+    description: '支持 DeepSeek 等模型，具备长期记忆、技能学习与任务自动化能力的 AI Agent。',
+    tags: ['DeepSeek', 'AI 助手', '长期记忆', '自动化'],
+    icon: 'assets/hermes.png',
+    package: { path: 'packages/Hermes-Setup.exe', fileName: 'Hermes-Setup.exe', version: '0.0.1', size: '7.58 MiB', platform: 'windows', architecture: 'x64', release: 'installers-2026-09-11' }
   }
 ];

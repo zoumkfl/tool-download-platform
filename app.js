@@ -12,6 +12,8 @@
   const icon = name => `<i data-lucide="${escape(name)}" aria-hidden="true"></i>`;
   const refreshIcons = () => window.lucide?.createIcons({ attrs: { "aria-hidden": "true" } });
   const downloading = new Set();
+  const stats = window.DownloadStats;
+  const formatCount = value => value === null ? "--" : value.toLocaleString("zh-CN");
   let favorites = new Set();
   try {
     const saved = JSON.parse(localStorage.getItem(storageKey) || "[]");
@@ -21,6 +23,13 @@
   let toastTimer;
 
   function packageUrl(tool) {
+    if (tool.package?.release) {
+      const repository = window.SITE_CONFIG?.repositoryUrl?.match(/^https:\/\/github\.com\/([\w.-]+\/[\w.-]+)\/?$/)?.[1];
+      const { release, fileName } = tool.package;
+      if (!repository || !/^[\w.-]+$/.test(release) || release === "." || release === ".."
+        || !/^[\w .-]+\.(exe|msi|zip|dmg|pkg|tgz|deb|rpm|AppImage)$/i.test(fileName || "")) return null;
+      return new URL(`https://github.com/${repository}/releases/download/${encodeURIComponent(release)}/${encodeURIComponent(fileName)}`);
+    }
     const packagePath = tool.package?.path;
     if (typeof packagePath !== "string" || !packagePath.startsWith("packages/")) return null;
     try {
@@ -53,7 +62,7 @@
       <button type="button" class="card-download-target" data-download="${escape(tool.id)}" aria-label="${escape(tool.name)} ${action}" aria-disabled="${!ready || busy}" aria-busy="${busy}" title="${escape(tool.name)} · ${action}"></button>
       <div class="card-top"><span class="tool-logo ${escape(tool.id)}" aria-hidden="true"><img src="${escape(tool.icon)}" alt="" width="28" height="28" loading="lazy"><span class="logo-fallback" hidden>${escape(tool.name.slice(0, 1))}</span></span><div class="card-name"><h3>${escape(tool.name)}</h3><div class="card-publisher">${escape(tool.publisher)}</div></div><button class="icon-button favorite-button ${saved ? "saved" : ""}" data-favorite="${escape(tool.id)}" title="${escape(favoriteLabel)}" aria-label="${escape(favoriteLabel)}" aria-pressed="${saved}">${icon("bookmark")}</button></div>
       <p class="card-description">${escape(tool.description)}</p>
-      <div class="card-tags"><span class="tag category">${escape(categories[tool.category] || tool.category)}</span><span class="tag">Agent</span></div>
+      <div class="card-tags"><span class="tag category">${escape(categories[tool.category] || tool.category)}</span><span class="tag">${escape(tool.package?.kind || "Agent")}</span><span class="download-count" title="此发行文件的全站累计下载请求数">${icon("download")}<span data-download-count="${escape(tool.id)}">${formatCount(stats?.count(tool.id) ?? null)}</span> 次下载</span></div>
       <div class="card-bottom"><span class="package-meta">${escape(metadata || (ready ? "安装包已就绪" : "待发布"))}</span><span class="download-button">${action}${icon(busy ? "loader-circle" : ready ? "download" : "clock-3")}</span></div>
     </article>`;
   }
@@ -118,6 +127,19 @@
     showToast(persisted ? `${removing ? "已取消收藏" : "已收藏"} ${byId.get(id).name}` : "已更新收藏；当前浏览器无法保存，关闭页面后将重置。");
   }
 
+  function renderDownloadStats() {
+    if (!stats) return;
+    $$("[data-download-count]").forEach(element => { element.textContent = formatCount(stats.count(element.dataset.downloadCount)); });
+    const values = software.map(tool => stats.count(tool.id));
+    $("#download-total").textContent = values.some(value => value === null) ? "--" : formatCount(values.reduce((total, value) => total + value, 0));
+    const status = $("#download-stats-status");
+    const time = stats.updatedAt ? new Date(stats.updatedAt).toLocaleString("zh-CN", { month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" }) : "";
+    status.textContent = stats.loading ? "统计更新中" : time ? `${stats.cached ? "最近记录" : "更新于"} ${time}` : "统计暂不可用";
+    status.title = "GitHub Releases 累计下载请求，包含本站及发行页下载；数据可能延迟更新。";
+    $("#refresh-download-stats").disabled = stats.loading;
+    $("#refresh-download-stats").setAttribute("aria-busy", String(stats.loading));
+  }
+
   async function downloadPackage(id) {
     const tool = byId.get(id);
     if (!tool || downloading.has(id)) return;
@@ -127,7 +149,7 @@
     render();
     try {
       // Verify the static file without buffering a potentially large installer.
-      if (url.protocol !== "file:") {
+      if (!tool.package?.release && url.protocol !== "file:") {
         const response = await fetch(url.href, { method: "HEAD", redirect: "error", cache: "no-store", signal: AbortSignal.timeout(15000) });
         if (!response.ok || response.status === 204 || /text\/html|application\/xhtml\+xml/i.test(response.headers.get("content-type") || "")) throw new Error("Package unavailable");
       }
@@ -139,6 +161,8 @@
       link.click();
       link.remove();
       showToast(`已请求下载 ${tool.name}`);
+      // GitHub counts asset requests; do not invent an optimistic local increment.
+      if (tool.package?.release) setTimeout(() => stats?.refresh(), 65000);
     } catch { showToast(`${tool.name} 安装包暂时无法下载，请稍后重试。`); }
     finally {
       downloading.delete(id);
@@ -174,6 +198,9 @@
   $("#sort").addEventListener("change", event => { state.sort = event.target.value; render(); });
   $("#clear-search").addEventListener("click", () => { state.query = ""; $("#search").value = ""; render(); $("#search").focus(); });
   $("#reset-filters").addEventListener("click", resetFilters);
+  $("#refresh-download-stats").addEventListener("click", () => stats?.refresh(true));
+  window.addEventListener("downloadstatschange", renderDownloadStats);
+  document.addEventListener("visibilitychange", () => { if (!document.hidden) stats?.refresh(); });
   $("#about-button").addEventListener("click", () => $("#about-dialog").showModal());
   $("#about-dialog").addEventListener("click", event => {
     const dialog = event.currentTarget;
@@ -191,4 +218,6 @@
   $("#package-status").textContent = available ? `${available} 个安装包已发布` : "安装包待上传";
   $$("[data-count]").forEach(count => { count.textContent = software.filter(tool => tool.category === count.dataset.count).length; });
   render();
+  renderDownloadStats();
+  stats?.refresh();
 })();
