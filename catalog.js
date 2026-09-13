@@ -8,7 +8,7 @@ window.SOFTWARE = [
     description: '帮助理解代码库、实现功能和审查代码变更的 AI 编程 Agent。',
     tags: ['AI 编程', '代码审查', '开发协作'],
     icon: 'assets/codex.png',
-    package: { path: '', fileName: '', version: '', size: '', platform: '', architecture: '' }
+    package: { path: '', fileName: 'OpenAI.Codex_26.908.4834.0_x64__2p2nqsd0c76g0.Msix', version: '26.908.4834.0', size: '739.02 MiB', platform: 'windows', architecture: 'x64', release: 'installers-2026-09-11', kind: 'MSIX 安装包' }
   },
   {
     id: 'claude',
@@ -28,7 +28,7 @@ window.SOFTWARE = [
     description: '集成 AI Agent 与代码补全功能，支持结合项目上下文编辑代码的开发工具。',
     tags: ['AI 编程', '代码编辑', '项目上下文'],
     icon: 'assets/cursor.png',
-    package: { path: '', fileName: '', version: '', size: '', platform: '', architecture: '' }
+    package: { path: '', fileName: 'CursorUserSetup-x64-3.20.17.exe', version: '3.20.17', size: '202.87 MiB', platform: 'windows', architecture: 'x64', release: 'installers-2026-09-11', kind: 'Windows 安装器' }
   },
   {
     id: 'claude-code',
@@ -49,5 +49,15 @@ window.SOFTWARE = [
     tags: ['DeepSeek', 'AI 助手', '长期记忆', '自动化'],
     icon: 'assets/hermes.png',
     package: { path: 'packages/Hermes-Setup.exe', fileName: 'Hermes-Setup.exe', version: '0.0.1', size: '7.58 MiB', platform: 'windows', architecture: 'x64', release: 'installers-2026-09-11' }
+  },
+  {
+    id: 'dsh',
+    name: 'DSH',
+    publisher: 'DeepSeek AI',
+    category: 'coding',
+    description: 'DeepSeek Harness 官方 Agent CLI。需先安装 Node.js，下载后运行 npm install -g ./DeepSeek-Harness-dsh-0.1.5-rc.2.tgz，再使用 dsh web。',
+    tags: ['DeepSeek', 'Agent', '命令行', '插件架构'],
+    icon: 'assets/deepseek.svg',
+    package: { path: '', fileName: 'DeepSeek-Harness-dsh-0.1.5-rc.2.tgz', version: '0.1.5-rc.2', size: '16.24 KiB', platform: 'cross-platform', architecture: 'Node.js', release: 'installers-2026-09-11', kind: 'npm CLI 包' }
   }
 ];

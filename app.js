@@ -3,7 +3,7 @@
 
   const software = Array.isArray(window.SOFTWARE) ? window.SOFTWARE : [];
   const categories = { coding: "编程开发", assistant: "AI 助手", local: "本地模型" };
-  const platforms = { windows: "Windows", macos: "macOS", linux: "Linux" };
+  const platforms = { windows: "Windows", macos: "macOS", linux: "Linux", "cross-platform": "跨平台" };
   const storageKey = "ai-toolbox:favorites:v1";
   const byId = new Map(software.map(tool => [tool.id, tool]));
   const $ = selector => document.querySelector(selector);
@@ -27,7 +27,7 @@
       const repository = window.SITE_CONFIG?.repositoryUrl?.match(/^https:\/\/github\.com\/([\w.-]+\/[\w.-]+)\/?$/)?.[1];
       const { release, fileName } = tool.package;
       if (!repository || !/^[\w.-]+$/.test(release) || release === "." || release === ".."
-        || !/^[\w .-]+\.(exe|msi|zip|dmg|pkg|tgz|deb|rpm|AppImage)$/i.test(fileName || "")) return null;
+        || !/^[\w .-]+\.(exe|msi|msix|msixbundle|appx|appxbundle|zip|dmg|pkg|tgz|deb|rpm|AppImage)$/i.test(fileName || "")) return null;
       return new URL(`https://github.com/${repository}/releases/download/${encodeURIComponent(release)}/${encodeURIComponent(fileName)}`);
     }
     const packagePath = tool.package?.path;

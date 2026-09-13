@@ -5,17 +5,20 @@
 - 在线访问：<https://zoumkfl.github.io/tool-download-platform/>
 - 源码仓库：<https://github.com/zoumkfl/tool-download-platform>
 
-当前包含 Codex、Claude Desktop、Cursor、Claude CLI 和 Hermes 五个条目。Claude Desktop、Claude CLI 和 Hermes 已提供 Windows x64 下载；Codex 和 Cursor 等待维护者上传，未配置文件时不能下载。
+当前包含 Codex、Claude Desktop、Cursor、Claude CLI、Hermes 和 DSH 六个条目，所有卡片都已配置可下载的 Release 附件。DSH 是 DeepSeek Harness 官方 CLI npm 包，需要先安装 Node.js，不能像 Windows 安装器一样双击运行。
 
-三个可下载文件发布在本仓库的 [installers-2026-09-11 Release](https://github.com/zoumkfl/tool-download-platform/releases/tag/installers-2026-09-11)：
+六个可下载文件发布在本仓库的 [installers-2026-09-11 Release](https://github.com/zoumkfl/tool-download-platform/releases/tag/installers-2026-09-11)：
 
 | 条目 | Release 文件 | 版本 | 大小 |
 | --- | --- | --- | --- |
+| Codex | `OpenAI.Codex_26.908.4834.0_x64__2p2nqsd0c76g0.Msix` | 26.908.4834.0 | 739.02 MiB |
 | Claude Desktop | `Claude-Desktop-Setup.exe` | 安装器 1.0.0.0 | 6.70 MiB |
+| Cursor | `CursorUserSetup-x64-3.20.17.exe` | 3.20.17 | 202.87 MiB |
 | Claude CLI | `Claude-CLI-2.1.236-windows-x64.exe` | 2.1.236 | 314.81 MiB |
 | Hermes | `Hermes-Setup.exe` | 安装器 0.0.1 | 7.58 MiB |
+| DSH | `DeepSeek-Harness-dsh-0.1.5-rc.2.tgz` | 0.1.5-rc.2 | 16.24 KiB |
 
-Claude CLI 是 Claude Code 的原生命令行可执行文件，不是图形安装向导。Hermes 由 Nous Research 发布，支持使用 DeepSeek 等模型；获取文件时官网的应用版本为 0.21.1，表中的 0.0.1 是引导安装器自身的版本。文件来源、SHA-256、签名核验结果和第三方许可见 [安装包发布记录](packages/RELEASE.md)。
+Claude CLI 是 Claude Code 的原生命令行可执行文件，不是图形安装向导。Hermes 由 Nous Research 发布，支持使用 DeepSeek 等模型；获取文件时官网的应用版本为 0.21.1，表中的 0.0.1 是引导安装器自身的版本。DSH 使用 DeepSeek 官方 npm 包，下载后在文件目录运行 `npm install -g ./DeepSeek-Harness-dsh-0.1.5-rc.2.tgz`，或直接运行 `npm install -g @deepseek-ai/dsh@0.1.5-rc.2`，安装后运行 `dsh web`。文件来源、SHA-256、签名核验结果和第三方许可见 [安装包发布记录](packages/RELEASE.md)。
 
 ## 本地运行
 
@@ -99,7 +102,7 @@ node scripts/generate-download-stats.mjs
 
 使用其他仓库时，同步修改本文链接和 `config.js` 的 `repositoryUrl`。资源和安装包使用相对路径，可部署在 GitHub Pages 的项目路径下。
 
-GitHub 普通 Git 仓库会阻止超过 100 MiB 的单个文件，GitHub Pages 已发布站点大小上限为 1 GB。Claude CLI 为 314.81 MiB，必须通过 Releases 等附件托管方式发布，不能直接提交到 Git 仓库。本项目已支持本仓库的 Release 附件直链，无需把大文件提交到 `packages/`。
+GitHub 普通 Git 仓库会阻止超过 100 MiB 的单个文件，GitHub Pages 已发布站点大小上限为 1 GB。Codex MSIX、Cursor 和 Claude CLI 都通过 Releases 附件托管，不能直接提交到 Git 仓库。本项目已支持本仓库的 Release 附件直链，无需把大文件提交到 `packages/`。
 
 ## 许可证
 

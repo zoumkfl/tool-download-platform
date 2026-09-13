@@ -4,11 +4,16 @@
 
 ## 当前发布
 
-发布标签为 `installers-2026-09-11`，包含三个 Windows x64 文件：
+发布标签为 `installers-2026-09-11`，包含五个 Windows x64 文件和一个跨平台 CLI 包：
 
+- `OpenAI.Codex_26.908.4834.0_x64__2p2nqsd0c76g0.Msix`：OpenAI Codex MSIX，版本 26.908.4834.0，739.02 MiB。
 - `Claude-Desktop-Setup.exe`：Claude Desktop 安装器 1.0.0.0，6.70 MiB。
+- `CursorUserSetup-x64-3.20.17.exe`：Cursor Windows x64 安装器 3.20.17，202.87 MiB。
 - `Hermes-Setup.exe`：Nous Research 发布的 Hermes 引导安装器 0.0.1，7.58 MiB。获取时官网应用版本为 0.21.1；Hermes 支持 DeepSeek 等模型。
 - `Claude-CLI-2.1.236-windows-x64.exe`：Claude Code 原生命令行可执行文件 2.1.236，314.81 MiB，不是图形安装向导。
+- `DeepSeek-Harness-dsh-0.1.5-rc.2.tgz`：DeepSeek AI 官方 DSH CLI npm 包 0.1.5-rc.2，16.24 KiB。需先安装 Node.js，在下载目录运行 `npm install -g ./DeepSeek-Harness-dsh-0.1.5-rc.2.tgz` 后使用 `dsh web`；也可直接从 npm 安装。该文件不是双击式桌面安装器。
+
+官方 DeepSeek Harness 目前没有公开的 Windows `.exe` 或 `.msi`。DSH 桌面版需要在官方发布环境构建，因此这里提供的是官方 npm CLI 包，不把第三方桌面构建冒充官方安装器。
 
 ## 上传 Release 附件
 
